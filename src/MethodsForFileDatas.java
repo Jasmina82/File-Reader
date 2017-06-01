@@ -3,17 +3,18 @@ import java.util.ArrayList;
 public class MethodsForFileDatas {
 	ArrayList<String> contentFromFile = new ArrayList<>();
 
-	/*constructor*/
+	/* constructor */
 	public MethodsForFileDatas(ArrayList<String> contentFromFile2) {
 		this.contentFromFile = contentFromFile2;
 	}
 
+	/* method counts words in file */
 	public void howManyWords() {
 
 		int number = 0;
 
 		for (int i = 0; i < contentFromFile.size(); i++) {
-			String[] words = contentFromFile.get(i).split(" ");
+			String[] words = contentFromFile.get(i).split("[ ,.!?-_()+~]");
 
 			for (String word : words) {
 				if (word.matches("\\w+")) {
@@ -25,12 +26,13 @@ public class MethodsForFileDatas {
 		System.out.println("\nWords in file: " + number);
 	}
 
+	/* method counts unique words */
 	public void howManyUniqueWords() {
 
 		ArrayList<String> uniqueWords = new ArrayList<>();
 
 		for (int i = 0; i < contentFromFile.size(); i++) {
-			String[] words = contentFromFile.get(i).split(" ");
+			String[] words = contentFromFile.get(i).split("[ ,.!?-_()+~]");
 
 			for (String word : words) {
 				if (word.matches("\\w+") && !uniqueWords.contains(word)) {
@@ -43,7 +45,6 @@ public class MethodsForFileDatas {
 
 	public void howManySentences() {
 
-		
 	}
 
 	public void howManyLetters() {
