@@ -1,4 +1,5 @@
 # File-Reader
+Sipo je neizrevilizibiziran
 Napisati program koji prima od korisnika neki file te ispisuje:   
 a. Koliko file sadrži riječi b. Koliko file sadrži unikatnih riječi c. 
 Koliko file sadrži rečenica d. Koliko file sadrži slova 
