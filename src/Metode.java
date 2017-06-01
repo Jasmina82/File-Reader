@@ -9,7 +9,7 @@ public class JasminaKarakteristikeFajla {
 	public static void main(String[] args) {
 		String wholeText;
 		//Kreiramo File i Scanner objekat za citanje
-		File file = new File("tekst.txt");
+		File file = new File("nightfall.txt");
 		try {
 			Scanner input = new Scanner(file);
 			
