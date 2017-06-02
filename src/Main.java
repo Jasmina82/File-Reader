@@ -1,6 +1,5 @@
+
 import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,40 +13,54 @@ public class Main {
 
 	/* Method for start */
 	public static void run() throws Exception {
-		
+
 		System.out.println("Enter the name of the file: ");
 
 		String user = input.nextLine();
 		checkSourceOfFile(user);
 	}
 
-	/*Depends of file source choose which method to call*/
-	public static void checkSourceOfFile(String user) throws MalformedURLException, FileNotFoundException, Exception {
-		
-		ArrayList<String> contentOfTheFile = new ArrayList<>();
-		
+	/* Depends of file source choose which method to call */
+	public static void checkSourceOfFile(String user) throws FileNotFoundException, Exception {
+
+		String tekstFromFile = " ";
+
 		if (user.startsWith("http://"))
-			contentOfTheFile = ManageFiles.fileFromUrl(user);
+			tekstFromFile = GetingTextFromFile.fileFromUrl(user);
 
 		else
-			contentOfTheFile = ManageFiles.fileFromLocal(user);
+			tekstFromFile = GetingTextFromFile.textFromFile(user);
 
-		getDataFromFile(contentOfTheFile);
+		if (tekstFromFile == null) {
+			System.out.println("Try again");
+			run();
+		}
+
+		else if (tekstFromFile.length() > 0 && tekstFromFile != null) {
+			getDataFromFile(tekstFromFile);
+		} else {
+			System.out.println(user + " is empty file!Try again!");
+			run();
+		}
 	}
 
 	/* Method with results from file */
-	public static void getDataFromFile(ArrayList<String> contentFromFile) {
+	public static void getDataFromFile(String contentFromFile) throws Exception {
 
-		MethodsForFileDatas readFile = new MethodsForFileDatas(contentFromFile);
+		CharacterAndSentencesInFile readChars = new CharacterAndSentencesInFile(contentFromFile);
+		WordsAndSentences readWord = new WordsAndSentences(contentFromFile);
 
 		System.out.println("File's data: ");
-		readFile.howManyWords();
-		readFile.howManyUniqueWords();
-		readFile.howManySentences();
-		readFile.howManyLetters();
-		readFile.howManyCharacters();
-		readFile.howManyTimesLetterRepeats();
-
+		readWord.howManyWords();
+		readWord.howManyUniqueWords();
+		readWord.howManySentences();
+		readChars.howManyLetters();
+		readChars.howManyCharacters();
+		try {
+			readChars.howManyTimesLetterRepeats();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("\nSomething went wrong with counting occurrency of each Letter");
+		}
 	}
 
 }
