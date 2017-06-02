@@ -52,11 +52,34 @@ public class MethodsForFileDatas {
 	}
 
 	public void howManyCharacters() {
-
+		int characterCounter = 0;
+		
+		for(int i = 0;i<contentFromFile.size();i++){
+			for(int j = 0;j<contentFromFile.get(i).length();j++){
+				characterCounter++;
+			}
+		}
+		
+		System.out.printf("\nNumber of characters: %d \n",characterCounter);
+		
 	}
 
 	public void howManyTimesLetterRepeats() {
-
+		int[] characters = new int[26];
+		
+		for(int i = 0;i<contentFromFile.size();i++){
+			for(int j = 0;j<contentFromFile.get(i).length();j++){
+				if(Character.isLetter(contentFromFile.get(i).charAt(j))){
+					characters[Character.toLowerCase(contentFromFile.get(i).charAt(j))-97]+=1;
+							
+				}
+			}
+		}
+		System.out.println("\nOccurence of letters: ");
+		System.out.println("-----------------------");
+		for(int i = 0;i<characters.length;i++){
+			System.out.printf("%s occured %d times.\n",(char)(i + 97),characters[i]);
+		}
 	}
 
 }
